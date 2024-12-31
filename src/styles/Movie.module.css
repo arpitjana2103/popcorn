@@ -1,0 +1,12 @@
+.movie {
+    border: 1px solid #fa525297;
+    border-radius: 0.4rem;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.movie .imageBox img {
+    width: 4rem;
+    border-radius: 0.3rem;
+}

@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-style: inherit;
   transition: all 0.3s;
+  color: #343a40;
 }
 
 body {
