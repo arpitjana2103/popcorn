@@ -5,9 +5,10 @@
   padding: 0;
   box-sizing: border-box;
   font-style: inherit;
+  transition: all 0.3s;
 }
 
 body {
   font-family: "Roboto Mono", serif;
-  background-color: #e7f5ff;
+  background-color: #fff9db;
 }
