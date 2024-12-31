@@ -8,7 +8,7 @@ function WatchedMovie({ image, name, imdbRating, userRating, length }) {
                 <img src={image} alt={name} />
             </div>
             <div className={styles.detailsBox}>
-                <h3>{name}</h3>
+                <h4>{name}</h4>
                 <div>
                     <span>
                         <Emoji txt="🍅" />

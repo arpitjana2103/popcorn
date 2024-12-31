@@ -1,4 +1,5 @@
 import WatchedMovie from "./WatchedMovie";
+import styles from "../styles/WatchedMovieList.module.css";
 
 const tempWatchedData = [
     {
@@ -23,7 +24,7 @@ const tempWatchedData = [
 
 function WatchedMovieList() {
     return (
-        <div>
+        <div className={styles.watchedMovieList}>
             {tempWatchedData.map(function (movie) {
                 return (
                     <WatchedMovie
