@@ -1,0 +1,14 @@
+.logoBox {
+  display: flex;
+  gap: 0.1rem;
+  align-items: center;
+}
+
+.logoBox img {
+  height: 1.1rem;
+}
+
+.logoBox h1 {
+  font-size: 0.7rem;
+  color: #1971c2;
+}
