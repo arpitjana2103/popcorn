@@ -1,11 +1,11 @@
-App
-    1. Nav
+App (movies, setMovies, query, setQuery)
+    1. Nav (handleChange)
         1.1 Logo
-        1.2 Search
+        1.2 Search (handleChange)
         1.3 TotalResults
 
-    2. Box 1
-        2.1 MovieList
+    2. Box 1 (movies)
+        2.1 MovieList (movies)
             2.1.1 Movie
 
     3. Box 2
