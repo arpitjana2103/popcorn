@@ -24,6 +24,11 @@
     margin-top: auto;
 }
 
+.movie .detailsBox > div > span {
+    display: flex;
+    gap: 0.5rem;
+}
+
 .movie .detailsBox p {
     display: inline-block;
 }
