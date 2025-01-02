@@ -1,7 +1,7 @@
 import Movie from "./Movie";
 import styles from "../styles/MovieList.module.css";
 
-function MovieList({ movies }) {
+function MovieList({ movies, handleMovieCardClick }) {
     return (
         <div className={styles.movieList}>
             {movies.map(function (movie) {
@@ -10,6 +10,8 @@ function MovieList({ movies }) {
                         image={movie.Poster}
                         name={movie.Title}
                         year={movie.Year}
+                        imdbID={movie.imdbID}
+                        handleMovieCardClick={handleMovieCardClick}
                         key={movie.imdbID}
                     />
                 );
