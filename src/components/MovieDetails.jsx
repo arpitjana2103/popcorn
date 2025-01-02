@@ -15,21 +15,28 @@ import Emoji from "./Emoji";
 
 function MovieDetails({ movieDetails }) {
     const {
-        title,
-        poster,
-        runtime,
+        Title: title,
+        Poster: poster,
+        Runtime: runtime,
         imdbRating,
-        plot,
-        released,
-        actors,
-        director,
-        genre,
+        Plot: plot,
+        Released: released,
+        Actors: actors,
+        Director: director,
+        Genre: genre,
     } = movieDetails;
 
     return (
         <div className={styles.movieDetails}>
             <div className={styles.details}>
-                <img src={poster} alt={title} />
+                <img
+                    src={
+                        poster === "N/A"
+                            ? "https://blocks.astratic.com/img/general-img-portrait.png"
+                            : poster
+                    }
+                    alt={title}
+                />
                 <div>
                     <h3>{title}</h3>
                     <p>

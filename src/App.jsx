@@ -7,9 +7,11 @@ const KEY = "276bfff3";
 const API_URL = `http://www.omdbapi.com/?apikey=${KEY}`;
 
 function App() {
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState("spider");
     const [movies, setMovies] = useState([]);
-    const [movieDetails, setMovieDetails] = useState({});
+    const [movieDetails, setMovieDetails] = useState(null);
+
+    const resultCount = movies.length;
 
     useEffect(
         function () {
@@ -21,7 +23,10 @@ function App() {
             }
 
             if (query.length >= 3) fetchMovies();
-            else setMovies([]);
+            else {
+                setMovies([]);
+                // setMovieDetails(null);
+            }
         },
         [query]
     );
@@ -30,9 +35,20 @@ function App() {
         setQuery(e.target.value);
     }
 
-    async function handleMovieCardClick(imdbId) {
+    // Click 1 : movieDetail will be null
+
+    async function handleMovieCardClick(imdbID) {
+        // 1. MovieCard's imdbID
+        // 2. MovieDetail's imdbID
+
+        // Close in 2nd click
+        if (movieDetails?.imdbID === imdbID) {
+            setMovieDetails(null);
+            return;
+        }
+
         // 1. Fetch movie details with imdbId
-        const response = await fetch(`${API_URL}&i=${imdbId}`);
+        const response = await fetch(`${API_URL}&i=${imdbID}`);
         const data = await response.json();
 
         // 2. Update movieDetail state
@@ -41,8 +57,16 @@ function App() {
 
     return (
         <div>
-            <Nav handleChange={handleChangeSearchQuery} query={query} />
-            <Main movies={movies} handleMovieCardClick={handleMovieCardClick} />
+            <Nav
+                handleChange={handleChangeSearchQuery}
+                query={query}
+                resultCount={resultCount}
+            />
+            <Main
+                movies={movies}
+                handleMovieCardClick={handleMovieCardClick}
+                movieDetails={movieDetails}
+            />
         </div>
     );
 }

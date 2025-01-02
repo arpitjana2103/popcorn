@@ -4,12 +4,12 @@ import TotalResults from "./TotalResults";
 
 import styles from "../styles/Nav.module.css";
 
-function Nav({ handleChange, query }) {
+function Nav({ handleChange, query, resultCount }) {
     return (
         <div className={styles.nav}>
             <Logo />
             <Search handleChange={handleChange} query={query} />
-            <TotalResults />
+            <TotalResults resultCount={resultCount} />
         </div>
     );
 }

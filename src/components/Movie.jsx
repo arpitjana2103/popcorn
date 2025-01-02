@@ -7,7 +7,14 @@ function Movie({ imdbID, image, name, year, handleMovieCardClick }) {
             className={styles.movie}
         >
             <div className={styles.imageBox}>
-                <img src={image} alt={name} />
+                <img
+                    src={
+                        image === "N/A"
+                            ? "https://blocks.astratic.com/img/general-img-portrait.png"
+                            : image
+                    }
+                    alt={name}
+                />
             </div>
 
             <div className={styles.detailsBox}>
