@@ -7,11 +7,12 @@ const KEY = "276bfff3";
 const API_URL = `http://www.omdbapi.com/?apikey=${KEY}`;
 
 function App() {
-    const [query, setQuery] = useState("spider");
+    const [query, setQuery] = useState("");
     const [movies, setMovies] = useState([]);
     const [movieDetails, setMovieDetails] = useState(null);
 
     const resultCount = movies.length;
+    const activeMovieID = movieDetails?.imdbID;
 
     useEffect(
         function () {
@@ -25,7 +26,6 @@ function App() {
             if (query.length >= 3) fetchMovies();
             else {
                 setMovies([]);
-                // setMovieDetails(null);
             }
         },
         [query]
@@ -66,6 +66,7 @@ function App() {
                 movies={movies}
                 handleMovieCardClick={handleMovieCardClick}
                 movieDetails={movieDetails}
+                activeMovieID={activeMovieID}
             />
         </div>
     );

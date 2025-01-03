@@ -7,6 +7,10 @@
     cursor: pointer;
 }
 
+.activeMovie {
+    background-color: #fcefb1;
+}
+
 .movie:hover {
     background-color: #fcefb1;
 }

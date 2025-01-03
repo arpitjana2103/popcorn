@@ -1,7 +1,7 @@
 import Movie from "./Movie";
 import styles from "../styles/MovieList.module.css";
 
-function MovieList({ movies, handleMovieCardClick }) {
+function MovieList({ movies, handleMovieCardClick, activeMovieID }) {
     return (
         <div className={styles.movieList}>
             {movies.map(function (movie) {
@@ -12,6 +12,7 @@ function MovieList({ movies, handleMovieCardClick }) {
                         year={movie.Year}
                         imdbID={movie.imdbID}
                         handleMovieCardClick={handleMovieCardClick}
+                        active={movie.imdbID === activeMovieID}
                         key={movie.imdbID}
                     />
                 );

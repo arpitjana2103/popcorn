@@ -1,10 +1,10 @@
 import styles from "../styles/Movie.module.css";
 
-function Movie({ imdbID, image, name, year, handleMovieCardClick }) {
+function Movie({ imdbID, image, name, year, handleMovieCardClick, active }) {
     return (
         <div
             onClick={() => handleMovieCardClick(imdbID)}
-            className={styles.movie}
+            className={`${styles.movie} ${active ? styles.activeMovie : ""}`}
         >
             <div className={styles.imageBox}>
                 <img
