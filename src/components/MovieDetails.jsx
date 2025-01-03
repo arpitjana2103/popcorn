@@ -13,7 +13,7 @@ import Emoji from "./Emoji";
 //     genre: "Action, Adventure, Fantasy",
 // };
 
-function MovieDetails({ movieDetails }) {
+function MovieDetails({ movieDetails, handleCloseMovieDetail }) {
     const {
         Title: title,
         Poster: poster,
@@ -28,6 +28,12 @@ function MovieDetails({ movieDetails }) {
 
     return (
         <div className={styles.movieDetails}>
+            <button
+                onClick={handleCloseMovieDetail}
+                className={styles.closeMovie}
+            >
+                <Emoji txt="❌" />
+            </button>
             <div className={styles.details}>
                 <img
                     src={

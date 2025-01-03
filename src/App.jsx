@@ -7,13 +7,16 @@ const KEY = "276bfff3";
 const API_URL = `http://www.omdbapi.com/?apikey=${KEY}`;
 
 function App() {
+    // 1. States
     const [query, setQuery] = useState("");
     const [movies, setMovies] = useState([]);
     const [movieDetails, setMovieDetails] = useState(null);
 
+    // 2. Derived States
     const resultCount = movies.length;
     const activeMovieID = movieDetails?.imdbID;
 
+    // 3. Effects
     useEffect(
         function () {
             async function fetchMovies() {
@@ -30,6 +33,8 @@ function App() {
         },
         [query]
     );
+
+    // 4. Handeller Functions
 
     function handleChangeSearchQuery(e) {
         setQuery(e.target.value);
@@ -55,6 +60,11 @@ function App() {
         setMovieDetails(data);
     }
 
+    function handleCloseMovieDetail() {
+        setMovieDetails(null);
+    }
+
+    // 5. JSX
     return (
         <div>
             <Nav
@@ -67,6 +77,7 @@ function App() {
                 handleMovieCardClick={handleMovieCardClick}
                 movieDetails={movieDetails}
                 activeMovieID={activeMovieID}
+                handleCloseMovieDetail={handleCloseMovieDetail}
             />
         </div>
     );
