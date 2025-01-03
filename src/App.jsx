@@ -8,9 +8,11 @@ const API_URL = `http://www.omdbapi.com/?apikey=${KEY}`;
 
 function App() {
     // 1. States
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState("spider");
     const [movies, setMovies] = useState([]);
     const [movieDetails, setMovieDetails] = useState(null);
+    const [isLoadingMovies, setIsLoadingMovies] = useState(false);
+    const [isLoadingMovieDetails, setIsLoadingMovieDetails] = useState(false);
 
     // 2. Derived States
     const resultCount = movies.length;
@@ -20,9 +22,13 @@ function App() {
     useEffect(
         function () {
             async function fetchMovies() {
+                setIsLoadingMovies(true);
+                setMovies([]);
+
                 const response = await fetch(`${API_URL}&s=${query}`);
                 const data = await response.json();
 
+                setIsLoadingMovies(false);
                 setMovies(data.Search || []);
             }
 
@@ -41,7 +47,6 @@ function App() {
     }
 
     // Click 1 : movieDetail will be null
-
     async function handleMovieCardClick(imdbID) {
         // 1. MovieCard's imdbID
         // 2. MovieDetail's imdbID
@@ -53,10 +58,13 @@ function App() {
         }
 
         // 1. Fetch movie details with imdbId
+        setIsLoadingMovieDetails(true);
+        setMovieDetails(null);
         const response = await fetch(`${API_URL}&i=${imdbID}`);
         const data = await response.json();
 
         // 2. Update movieDetail state
+        setIsLoadingMovieDetails(false);
         setMovieDetails(data);
     }
 
@@ -78,6 +86,8 @@ function App() {
                 movieDetails={movieDetails}
                 activeMovieID={activeMovieID}
                 handleCloseMovieDetail={handleCloseMovieDetail}
+                isLoadingMovies={isLoadingMovies}
+                isLoadingMovieDetails={isLoadingMovieDetails}
             />
         </div>
     );
