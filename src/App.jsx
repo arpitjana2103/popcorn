@@ -76,20 +76,31 @@ function App() {
         setMovieDetails(null);
     }
 
-    function handleAddMovieToWatchList(movieDeatils, userRating) {
+    function handleAddMovieToWatchList(movieDetails, userRating) {
         const watchedMovie = {
-            name: movieDeatils.Title,
-            poster: movieDeatils.Poster,
-            releaseDate: movieDeatils.Released,
-            runtime: movieDeatils.Runtime,
-            imdbRating: Number(movieDeatils.imdbRating),
+            name: movieDetails.Title,
+            poster: movieDetails.Poster,
+            releaseDate: movieDetails.Released,
+            runtime: movieDetails.Runtime,
+            imdbRating: Number(movieDetails.imdbRating),
             userRating: userRating,
-            imdbID: movieDeatils.imdbID,
+            imdbID: movieDetails.imdbID,
         };
 
-        setWatchList(function (watchList) {
-            return [...watchList, watchedMovie];
+        const index = watchList.findIndex(function (movie) {
+            return movie.imdbID === movieDetails.imdbID;
         });
+
+        if (index !== -1) {
+            watchList[index] = watchedMovie;
+            setWatchList(function (watchList) {
+                return [...watchList];
+            });
+        } else {
+            setWatchList(function (watchList) {
+                return [...watchList, watchedMovie];
+            });
+        }
     }
 
     // 5. JSX
