@@ -1,4 +1,5 @@
-App (movies, setMovies, query, setQuery, currentMovieDetail) (handleClick)
+App (movies, setMovies, query, setQuery, currentMovieDetail, watchList ) (handleClick)
+
     1. Nav 
         1.1 Logo
         1.2 Search 
@@ -6,15 +7,16 @@ App (movies, setMovies, query, setQuery, currentMovieDetail) (handleClick)
 
     2. Box 1 
         2.1 MovieList 
-            2.1.1 Movie (id) ( onClick - handleClick(id) )
-            2.1.1 Movie (id) ( onClick - handleClick(id) )
-            2.1.1 Movie (id) ( onClick - handleClick(id) )
-            2.1.1 Movie (id) ( onClick - handleClick(id) )
+            2.1.1 Movie (id)
+            2.1.1 Movie (id)
+            2.1.1 Movie (id)
+            2.1.1 Movie (id)
        
-
     3. Box 2
         3.1 WatchSummery
         3.2 WatchedMoviesList
             3.2.1 WatchedMovie
+            
         or
-        3.3 MovieDetails ( movieDetails )
+
+        3.3 MovieDetails (imdbID) ( rateTheMovie() )

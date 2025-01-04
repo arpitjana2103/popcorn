@@ -6,11 +6,15 @@ import "./global.css";
 const KEY = "276bfff3";
 const API_URL = `http://www.omdbapi.com/?apikey=${KEY}`;
 
+// { name: "", poster: "", releaseDate: "", length: "", imdbRating: "", userRating: "" }
+
 function App() {
     // 1. States
-    const [query, setQuery] = useState("spider");
     const [movies, setMovies] = useState([]);
     const [movieDetails, setMovieDetails] = useState(null);
+    const [watchList, setWatchList] = useState([]);
+
+    const [query, setQuery] = useState("spider");
     const [isLoadingMovies, setIsLoadingMovies] = useState(false);
     const [isLoadingMovieDetails, setIsLoadingMovieDetails] = useState(false);
 
@@ -72,6 +76,22 @@ function App() {
         setMovieDetails(null);
     }
 
+    function handleAddMovieToWatchList(movieDeatils, userRating) {
+        const watchedMovie = {
+            name: movieDeatils.Title,
+            poster: movieDeatils.Poster,
+            releaseDate: movieDeatils.Released,
+            runtime: movieDeatils.Runtime,
+            imdbRating: Number(movieDeatils.imdbRating),
+            userRating: userRating,
+            imdbID: movieDeatils.imdbID,
+        };
+
+        setWatchList(function (watchList) {
+            return [...watchList, watchedMovie];
+        });
+    }
+
     // 5. JSX
     return (
         <div>
@@ -88,6 +108,8 @@ function App() {
                 handleCloseMovieDetail={handleCloseMovieDetail}
                 isLoadingMovies={isLoadingMovies}
                 isLoadingMovieDetails={isLoadingMovieDetails}
+                handleAddMovieToWatchList={handleAddMovieToWatchList}
+                watchList={watchList}
             />
         </div>
     );
