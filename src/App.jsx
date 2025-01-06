@@ -6,8 +6,6 @@ import "./global.css";
 const KEY = "276bfff3";
 const API_URL = `http://www.omdbapi.com/?apikey=${KEY}`;
 
-// { name: "", poster: "", releaseDate: "", length: "", imdbRating: "", userRating: "" }
-
 function App() {
     // 1. States
     const [movies, setMovies] = useState([]);
@@ -103,6 +101,15 @@ function App() {
         }
     }
 
+    function handleRemoveMovieToWatchList(imdbID) {
+        setWatchList(function (watchList) {
+            watchList = watchList.filter(function (movie) {
+                return movie.imdbID !== imdbID;
+            });
+            return [...watchList];
+        });
+    }
+
     // 5. JSX
     return (
         <div>
@@ -121,6 +128,7 @@ function App() {
                 isLoadingMovieDetails={isLoadingMovieDetails}
                 handleAddMovieToWatchList={handleAddMovieToWatchList}
                 watchList={watchList}
+                handleRemoveMovieToWatchList={handleRemoveMovieToWatchList}
             />
         </div>
     );

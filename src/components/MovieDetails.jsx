@@ -1,18 +1,7 @@
 import styles from "../styles/MovieDetails.module.css";
 import Emoji from "./Emoji";
 import StarRating from "./StarRating";
-
-// const movie = {
-//     title: "Spider-Man: No Way Home",
-//     poster: "https://m.media-amazon.com/images/M/MV5BMmFiZGZjMmEtMTA0Ni00MzA2LTljMTYtZGI2MGJmZWYzZTQ2XkEyXkFqcGc@._V1_SX300.jpg",
-//     runtime: "148 min",
-//     imdbRating: "8.2",
-//     plot: "With Spider-Man's identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear.",
-//     released: "17 Dec 2021",
-//     actors: "Tom Holland, Zendaya, Benedict Cumberbatch",
-//     director: "Jon Watts",
-//     genre: "Action, Adventure, Fantasy",
-// };
+import { formatMovieLength } from "../helper";
 
 function MovieDetails({
     movieDetails,
@@ -55,7 +44,7 @@ function MovieDetails({
                 <div>
                     <h3>{title}</h3>
                     <p>
-                        {released} • {runtime} {genre}
+                        {released} • {formatMovieLength(runtime)} {genre}
                     </p>
                     <p>
                         <Emoji txt="🍅" /> {imdbRating} Tomatos
