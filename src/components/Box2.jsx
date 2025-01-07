@@ -18,7 +18,7 @@ function Box2({
 
             {!isLoadingMovieDetails && !movieDetails && (
                 <>
-                    <WatchSummery />
+                    <WatchSummery watchList={watchList} />
                     <WatchedMovieList
                         watchList={watchList}
                         handleRemoveMovieToWatchList={

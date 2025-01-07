@@ -10,7 +10,12 @@ function App() {
     // 1. States
     const [movies, setMovies] = useState([]);
     const [movieDetails, setMovieDetails] = useState(null);
-    const [watchList, setWatchList] = useState([]);
+
+    const [watchList, setWatchList] = useState(function () {
+        const data = JSON.parse(localStorage.getItem("watchList"));
+        if (data) return data;
+        else return [];
+    });
 
     const [query, setQuery] = useState("spider");
     const [isLoadingMovies, setIsLoadingMovies] = useState(false);
@@ -21,6 +26,7 @@ function App() {
     const activeMovieID = movieDetails?.imdbID;
 
     // 3. Effects
+    // 3.1 >> Fetching movies
     useEffect(
         function () {
             async function fetchMovies() {
@@ -40,6 +46,14 @@ function App() {
             }
         },
         [query]
+    );
+
+    // 3.2 >> Save Updated watchlist into LocalStorage after every Render
+    useEffect(
+        function () {
+            localStorage.setItem("watchList", JSON.stringify(watchList));
+        },
+        [watchList]
     );
 
     // 4. Handeller Functions
