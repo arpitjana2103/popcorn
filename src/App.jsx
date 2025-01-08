@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
-import Main from "./components/Main";
 import Nav from "./components/Nav";
 import "./global.css";
+import Main from "./components/Main";
+import Box1 from "./components/Box1";
+import Box2 from "./components/Box2";
+import MovieList from "./components/MovieList";
+import Message from "./components/Message";
+import Emoji from "./components/Emoji";
+import Loader from "./components/Loader";
+import useMovies from "./hooks/useMovies";
 
 const KEY = "276bfff3";
 const API_URL = `http://www.omdbapi.com/?apikey=${KEY}`;
 
 function App() {
     // 1. States
-    const [movies, setMovies] = useState([]);
+    const [query, setQuery] = useState("spider");
     const [movieDetails, setMovieDetails] = useState(null);
-
     const [watchList, setWatchList] = useState(function () {
         const data = JSON.parse(localStorage.getItem("watchList"));
         if (data) return data;
         else return [];
     });
-
-    const [query, setQuery] = useState("spider");
-    const [isLoadingMovies, setIsLoadingMovies] = useState(false);
+    const { movies, isLoadingMovies } = useMovies(query);
     const [isLoadingMovieDetails, setIsLoadingMovieDetails] = useState(false);
 
     // 2. Derived States
@@ -26,27 +30,6 @@ function App() {
     const activeMovieID = movieDetails?.imdbID;
 
     // 3. Effects
-    // 3.1 >> Fetching movies
-    useEffect(
-        function () {
-            async function fetchMovies() {
-                setIsLoadingMovies(true);
-                setMovies([]);
-
-                const response = await fetch(`${API_URL}&s=${query}`);
-                const data = await response.json();
-
-                setIsLoadingMovies(false);
-                setMovies(data.Search || []);
-            }
-
-            if (query.length >= 3) fetchMovies();
-            else {
-                setMovies([]);
-            }
-        },
-        [query]
-    );
 
     // 3.2 >> Save Updated watchlist into LocalStorage after every Render
     useEffect(
@@ -132,18 +115,33 @@ function App() {
                 query={query}
                 resultCount={resultCount}
             />
-            <Main
-                movies={movies}
-                handleMovieCardClick={handleMovieCardClick}
-                movieDetails={movieDetails}
-                activeMovieID={activeMovieID}
-                handleCloseMovieDetail={handleCloseMovieDetail}
-                isLoadingMovies={isLoadingMovies}
-                isLoadingMovieDetails={isLoadingMovieDetails}
-                handleAddMovieToWatchList={handleAddMovieToWatchList}
-                watchList={watchList}
-                handleRemoveMovieToWatchList={handleRemoveMovieToWatchList}
-            />
+
+            <Main>
+                <Box1>
+                    {isLoadingMovies && <Loader />}
+
+                    {!isLoadingMovies && movies.length === 0 ? (
+                        <Message>
+                            <Emoji txt="🚫" /> No Movie Found !
+                        </Message>
+                    ) : (
+                        <MovieList
+                            movies={movies}
+                            handleMovieCardClick={handleMovieCardClick}
+                            activeMovieID={activeMovieID}
+                        />
+                    )}
+                </Box1>
+
+                <Box2
+                    movieDetails={movieDetails}
+                    handleCloseMovieDetail={handleCloseMovieDetail}
+                    isLoadingMovieDetails={isLoadingMovieDetails}
+                    handleAddMovieToWatchList={handleAddMovieToWatchList}
+                    watchList={watchList}
+                    handleRemoveMovieToWatchList={handleRemoveMovieToWatchList}
+                />
+            </Main>
         </div>
     );
 }
