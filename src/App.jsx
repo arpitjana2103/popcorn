@@ -15,7 +15,7 @@ const API_URL = `http://www.omdbapi.com/?apikey=${KEY}`;
 
 function App() {
     // 1. States
-    const [query, setQuery] = useState("spider");
+    const [query, setQuery] = useState("");
     const [movieDetails, setMovieDetails] = useState(null);
     const [watchList, setWatchList] = useState(function () {
         const data = JSON.parse(localStorage.getItem("watchList"));
